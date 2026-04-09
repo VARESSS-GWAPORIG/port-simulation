@@ -248,46 +248,87 @@ class PortSimulator:
         self.completed_ships = []
         self.ship_history = []
         self.stats.clear()
-# --- CUSTOM BACKGROUND CSS ---
-    st.markdown(
-        """
-        <style>
-        /* This targets the base container of the entire app */
-        [data-testid="stAppViewContainer"] {
-            background-image: url("https://images.unsplash.com/photo-1524522173746-f628baad3644?q=80&w=2000&auto=format&fit=crop") !important;
-            background-attachment: fixed !important;
-            background-size: cover !important;
-            background-position: center !important;
-        }
 
-        /* This makes the main content area transparent so the image shows through */
-        [data-testid="stMainViewContainer"] {
-            background-color: rgba(0, 0, 0, 0.3) !important;
-        }
+# --- CUSTOM BLACK BACKGROUND CSS ---
+st.markdown(
+    """
+    <style>
+    /* Pure black background */
+    [data-testid="stAppViewContainer"] {
+        background-color: #000000 !important;
+        background-image: none !important;
+        background-attachment: fixed !important;
+        background-size: cover !important;
+        background-position: center !important;
+    }
 
-        /* This styles the actual content box to make it readable */
-        .main .block-container {
-            background-color: rgba(17, 24, 39, 0.8) !important; /* Dark slate with transparency */
-            border-radius: 15px;
-            padding: 3rem;
-            margin-top: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: white !important;
-        }
+    /* Black overlay for main container */
+    [data-testid="stMainViewContainer"] {
+        background-color: #000000 !important;
+    }
 
-        /* Force sidebar to be semi-transparent as well */
-        [data-testid="stSidebar"] {
-            background-color: rgba(0, 0, 0, 0.6) !important;
-        }
+    /* Glassmorphism effect with black theme */
+    .main .block-container {
+        background-color: rgba(10, 10, 10, 0.95) !important; 
+        backdrop-filter: blur(15px);
+        border-radius: 20px;
+        padding: 2rem 3rem;
+        margin-top: 2rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.95);
+    }
 
-        /* Ensure all text is white for readability against the dark ocean tint */
-        h1, h2, h3, p, span, label {
-            color: white !important;
-        }
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
+    /* Sidebar styling - pure black */
+    [data-testid="stSidebar"] {
+        background-color: rgba(5, 5, 5, 0.98) !important;
+        backdrop-filter: blur(15px);
+        border-right: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    /* Global text color adjustments for readability on black */
+    h1, h2, h3, p, span, label, .stMarkdown {
+        color: #F8FAFC !important;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+    }
+
+    /* Specific fix for metric labels and values */
+    [data-testid="stMetricLabel"] {
+        color: #94A3B8 !important;
+    }
+    
+    [data-testid="stMetricValue"] {
+        color: #38BDF8 !important;
+    }
+
+    /* Slider and widget contrast improvements */
+    .stSlider label {
+        color: #CBD5E1 !important;
+    }
+
+    /* Button styling for black theme */
+    .stButton > button {
+        background-color: rgba(59, 130, 246, 0.2) !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        color: #F8FAFC !important;
+    }
+
+    .stButton > button:hover {
+        background-color: rgba(59, 130, 246, 0.3) !important;
+        border: 1px solid rgba(59, 130, 246, 0.5) !important;
+    }
+
+    /* Metric container styling */
+    [data-testid="stMetric"] {
+        background-color: rgba(20, 20, 20, 0.8) !important;
+        border-radius: 12px;
+        padding: 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 def main():
     st.set_page_config(page_title="Port Operations Simulator", layout="wide")
     st.title("🚢 Port Operations Discrete-Event Simulation")
